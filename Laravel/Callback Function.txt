@@ -1,0 +1,17 @@
+public function getComments(Request $request)
+    {
+        try {
+            $discussionId = $request->discussionId;
+            $discussionComments = Discussion::where("id", $discussionId)
+                                                    ->with('comments.createdBy.profile','createdBy','creatorProfile')
+                                                    ->with(['checkMyDiscussion' => function ($q) {
+                                                        $q->where('id', '=', Auth::Id());
+                                                    }])
+                                                    ->orderBy('id','ASC')
+                                                    ->first();
+            return ApiHelper::jsonResponse('', 'OK', 200, $discussionComments);
+        } catch (\Exception $e) {
+            \Log::info($e);
+            return ApiHelper::jsonResponse('Something went wrong!', 'Not Found', 404, NULL);
+        }
+    }
