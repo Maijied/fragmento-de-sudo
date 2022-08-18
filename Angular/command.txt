@@ -1,0 +1,9 @@
+#Routing Module =>
+ng generate module [module-name] --routing
+or
+ng g m [module-name] --rounting
+
+#Component
+ng generate component <component-name> 
+or 
+ng g c Component name

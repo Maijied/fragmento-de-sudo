@@ -1,3 +1,4 @@
+Controller =>
 public function getComments(Request $request)
     {
         try {
@@ -15,3 +16,9 @@ public function getComments(Request $request)
             return ApiHelper::jsonResponse('Something went wrong!', 'Not Found', 404, NULL);
         }
     }
+
+Model =>
+    public function checkMyDiscussion()
+        {
+            return $this->belongsTo('App\Models\User', 'created_by', 'id');
+        }
