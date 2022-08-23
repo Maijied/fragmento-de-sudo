@@ -1,8 +1,12 @@
+-----------------------------CDN----------------------------------------------------
+
 CDN : https://dimsemenov.com/plugins/magnific-popup/
 Places CDN files in specific files:
 
-JS:
- <link rel="stylesheet" href="{{ asset('css/magnific-popup.css') }}">
+JS: 
+-----------------------------Multiple Image------------------------------------------
+
+<link rel="stylesheet" href="{{ asset('css/magnific-popup.css') }}">
 <script src="{{asset('js/jquery.magnific-popup.js')}}"></script>
  <script>
         $('.thumb').each(function() { // the containers for all your galleries
@@ -14,9 +18,27 @@ JS:
             }
         });
     });
-    </script>
-PHP:
+</script>
+
+-----------------------------Single File-------------------------------------------
+
+<script>
+$('a').magnificPopup({
+    type: 'image',
+    closeBtnInside: false,
+    closeOnContentClick: true,
+    image: {
+		verticalFit: true,
+		titleSrc: function(item) {
+		return item.el.attr('title') + ' &middot; <a class="image-source-link" href="'+item.src+'" target="_blank">open original</a>';
+			}
+		}
+	});
+</script>
+
+-----------------------------PHP-----------------------------------------------
+
  <td class="thumb my-auto text-center" style="height: 50px; width: 50px;">
-              <a id="thumbnailimg+{{$key}}" onclick="keyPass({{$key}})" href="{{url(config('app.imageUrl').$blog['thumbnail'])}}" class="with-caption image-link">
-              <img  style="height: 50px; width: 50px;" src="{{url(config('app.imageUrl').$blog['thumbnail'])}}" alt="">    
+      <a id="thumbnailimg" href="{{url(config('app.imageUrl').$blog['thumbnail'])}}" class="with-caption image-link">
+      <img  style="height: 50px; width: 50px;" src="{{url(config('app.imageUrl').$blog['thumbnail'])}}" alt="">    
 </td>
