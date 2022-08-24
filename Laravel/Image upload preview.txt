@@ -1,0 +1,24 @@
+----------------------------JS-----------------------------
+$('#bannerimg').change(function(){
+   let reader = new FileReader();
+   reader.onload = (e) => {    
+      $('#banner-preview-image').attr('src', e.target.result); 
+   }
+      reader.readAsDataURL(this.files[0]); 
+});
+
+--------------------------HTML------------------------------
+<div class="col-12">
+     <div class="row">
+          <div class="col-md-6">
+               <div class="form-group">
+                    <label for="#" class="font-weight-bold">Banner<span class="text-danger">*</span></label>
+                    <input class="form-control" type="file" id="bannerimg" name="banner" accept="image/*">
+                </div>
+          </div>
+          <div class="col-md-6">
+               <img id="banner-preview-image" src=""
+                alt="Banner Preview Image" style="max-height: 100px; max-width:200px;">
+          </div>
+     </div>
+</div>
