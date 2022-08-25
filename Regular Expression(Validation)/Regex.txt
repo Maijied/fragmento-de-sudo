@@ -1,0 +1,46 @@
+================================ How to work Regex =======================================
+
+Test Regex: ^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])(?=\S*[\W])\S*$
+
+Explanation:
+            	^: anchored to beginning of string
+		\S*: any set of characters
+		(?=\S{8,}): of at least length 8
+		(?=\S*[a-z]): containing at least one lowercase letter
+		(?=\S*[A-Z]): and at least one uppercase letter
+		(?=\S*[\d]): and at least one number
+		(?=\S*[\W]):To include special characters(which is non-word characters.)
+		(?=.*[\d\W]):Assert a string contains at least 1 special character or a digit
+		$: anchored to the end of the string 
+
+
+
+		Link: https://www.zorched.net/2009/05/08/password-strength-validation-with-regular-expressions/
+
+
+
+Test Regex: ^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])(?=\S*[\W])\S*$
+
+Deep Explanation:
+
+
+	1. ^ asserts position at start of a line
+	2. \S* matches any non-whitespace character (equal to [^\r\n\t\f\v ])
+	3. * Quantifier — Matches between zero and unlimited times, as many times as possible, giving back as needed (greedy)
+	4. Positive Lookahead (?=\S{8,})
+	5. Assert that the Regex below matches
+	6. \S{8,} matches any non-whitespace character (equal to [^\r\n\t\f\v ])
+	7. {8,} Quantifier — Matches between 8 and unlimited times, as many times as possible, giving back as needed (greedy)
+	8. Positive Lookahead (?=\S*[a-z])
+		Match a single character present in the list below [a-z]
+		a-z a single character in the range between a (index 97) and z (index 122) (case sensitive)
+	9. Positive Lookahead (?=\S*[A-Z])
+		Match a single character present in the list below [A-Z]
+		A-Z a single character in the range between A (index 65) and Z (index 90) (case sensitive)
+	10. Positive Lookahead (?=\S*[\d])
+		Match a single character present in the list below [\d]
+		\d matches a digit (equal to [0-9])
+	11. Positive Lookahead (?=\S*[\W])
+		Match a single character present in the list below [\W]
+
+	12. $ asserts position at the end of a line
