@@ -1,7 +1,7 @@
 -----------------------------CDN----------------------------------------------------
 
 CDN : https://dimsemenov.com/plugins/magnific-popup/
-Places CDN files in specific files:
+Places CDN files in specific folder:
 
 JS: 
 -----------------------------Multiple Image------------------------------------------
