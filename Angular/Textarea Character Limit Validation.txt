@@ -1,0 +1,15 @@
+------------------------HTML-------------------
+(ngModelChange)="characterCount($event, 250)" 
+
+ 
+-----------------------Angular------------------
+   // Character Count
+    characterCount(event:any,targetLength:number){
+        this.textCount = null;
+        let totalCharacter = event.replace(/<[^>]*>?/gm, '');
+        let totalCharacterLength = totalCharacter.length;
+        console.log(totalCharacterLength);
+        if (totalCharacterLength > targetLength){
+            this.textCount = "Maximum 250 characters allowed";
+        }
+    }
