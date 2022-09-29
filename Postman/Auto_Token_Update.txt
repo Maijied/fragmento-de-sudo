@@ -1,0 +1,22 @@
+const tokenUrl = 'http://localhost/eonecmsbackendv1/public/api/login';
+const email = 'admin@gmail.com';
+const password = '12345678';
+
+const getTokenRequest = {
+  method: 'POST',
+  url: tokenUrl,
+    body: {
+      mode: 'formdata',
+      formdata: [
+          { key: 'email', value: email },
+          { key: 'password', value: password }
+      ]
+  }
+};
+
+pm.sendRequest(getTokenRequest, (err, response) => {
+  const jsonResponse = response.json();
+  const newAccessToken = jsonResponse.data.token;
+  let token = pm.collectionVariables.get("token");
+  pm.collectionVariables.set('token',newAccessToken);
+});
