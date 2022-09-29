@@ -1,0 +1,9 @@
+$maxNum = ModelName::select('columnName')->max('columnName');
+Example =>
+  $getSortOrder = SellerRank::select('sort')->max('sort');;
+
+Or
+
+$maxNum = ModelName::max('columnName');
+Example =>
+  $getSortOrder = SellerRank::max('sort');;

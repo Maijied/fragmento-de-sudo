@@ -1,0 +1,7 @@
+if (Order::exists()) {
+    echo "im not empty";
+    die();
+} else {
+    echo "Im empty";
+    die();
+}

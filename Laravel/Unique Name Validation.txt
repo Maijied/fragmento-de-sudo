@@ -1,0 +1,24 @@
+For Create =>
+
+$validatorUnique = Validator::make($request->all(), [
+            'user_name' => 'unique:system_users',
+            'email' => 'unique:system_users'
+        ]);
+
+        if ($validatorUnique->fails()) {
+            Log::info($validatorUnique->errors());
+            return ApiHelper::jsonResponse('User Name or Email is already exists!', 'Not Found', 404, NULL);
+        }
+
+
+For Update =>
+
+$validatorUnique = Validator::make($request->all(), [
+                'user_name' => 'unique:system_users,user_name,' . $request->id . ',id',
+                'email' => 'unique:system_users,email,' . $request->id . ',id'
+            ]);
+
+            if ($validatorUnique->fails()) {
+                Log::info($validatorUnique->errors());
+                return ApiHelper::jsonResponse('User Name or Email is already exists!', 'Not Found', 404, NULL);
+            }
