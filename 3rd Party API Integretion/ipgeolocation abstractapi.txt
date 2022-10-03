@@ -1,0 +1,11 @@
+  getIPAddressV1() {
+    this.https
+      .get("https://ipgeolocation.abstractapi.com/v1/?api_key=f9550eae351e45f3ac987b2b314a8b7f")
+      .subscribe((res: any) => {
+        // this.ipAddress = res.ip;
+        console.log('getIPAddressV1', res);
+      });
+  }
+
+
+Source = https://www.abstractapi.com/
