@@ -1,0 +1,7 @@
+  $start = microtime(true);
+
+  Otp::where('phone_number', $request->phone_number)->where('is_verified', 0)->delete(); -->Checking This Execution
+
+  $time_elapsed_secs = microtime(true) - $start;
+
+  Log::info($time_elapsed_secs);
