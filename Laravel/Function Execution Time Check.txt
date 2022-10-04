@@ -5,3 +5,32 @@
   $time_elapsed_secs = microtime(true) - $start;
 
   Log::info($time_elapsed_secs);
+
+
+In Minute =>
+
+
+You can use microtime(true) with following manners:
+
+Put this at the start of your php file:
+
+//place this before any script you want to calculate time
+$time_start = microtime(true);
+
+// your script code goes here
+
+// do something
+
+Put this at the end of your php file:
+
+// Display Script End time
+$time_end = microtime(true);
+
+//dividing with 60 will give the execution time in minutes other wise seconds
+$execution_time = ($time_end - $time_start)/60;
+
+//execution time of the script
+echo '<b>Total Execution Time:</b> '.$execution_time.' Mins';
+
+It will output you result in minutes.
+
