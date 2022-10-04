@@ -1,10 +1,14 @@
-  $start = microtime(true);
+Using Micro Time =>
 
-  Otp::where('phone_number', $request->phone_number)->where('is_verified', 0)->delete(); -->Checking This Execution
+microtime — Return current Unix timestamp with microseconds
+ 
+ $start = microtime(true);
 
-  $time_elapsed_secs = microtime(true) - $start;
+ Otp::where('phone_number', $request->phone_number)->where('is_verified', 0)->delete(); -->Checking This Execution
 
-  Log::info($time_elapsed_secs);
+ $time_elapsed_secs = microtime(true) - $start;
+
+ Log::info($time_elapsed_secs);
 
 
 In Minute =>
@@ -33,4 +37,69 @@ $execution_time = ($time_end - $time_start)/60;
 echo '<b>Total Execution Time:</b> '.$execution_time.' Mins';
 
 It will output you result in minutes.
+
+
+Using "hrtime" =>
+
+
+
+The way I do it is by using hrtime, it's created for performance metrics and it is independent from system time. hrtime does not get affected by system time changes. hrtime is available since PHP 7.3.0
+
+$start = hrtime(true);
+sleep(5); // do something, in your case a loop
+$end = hrtime(true);
+$eta = $end - $start;
+// convert nanoseconds to milliseconds
+$eta /= 1e+6;
+echo "Code block was running for $eta milliseconds";
+
+Output:
+
+Code block was running for 5000.495206 milliseconds
+
+
+ExecutionTime class =>
+
+Code =>
+<?php
+
+namespace App\Helper;
+/*
+ * Usage
+ * $executionTime = new ExecutionTime();
+ * $executionTime->start();
+ * code
+ * $executionTime->end();
+ * echo $executionTime;
+ */
+
+class ExecutionTime
+{
+    private $startTime;
+    private $endTime;
+
+    public function start(){
+        $this->startTime = getrusage();
+    }
+
+    public function end(){
+        $this->endTime = getrusage();
+    }
+
+    private function runTime($ru, $rus, $index) {
+        return ($ru["ru_$index.tv_sec"]*1000 + intval($ru["ru_$index.tv_usec"]/1000))
+            -  ($rus["ru_$index.tv_sec"]*1000 + intval($rus["ru_$index.tv_usec"]/1000));
+    }
+
+    public function __toString(){
+        return "This process used " . $this->runTime($this->endTime, $this->startTime, "utime") .
+            " ms for its computations\nIt spent " . $this->runTime($this->endTime, $this->startTime, "stime") .
+            " ms in system calls\n";
+    }
+}
+
+
+Note: In PHP 5, the getrusage function only works in Unix-oid systems. Since PHP 7, it also works on Windows.
+
+
 
